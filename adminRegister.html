@@ -62,12 +62,11 @@
         }
 
         function goToStep1() {
-        // Step 2 এর পাসওয়ার্ড ও কনফার্ম পাসওয়ার্ড ফিল্ড এবং এরর মেসেজ সম্পূর্ণ রিসেট/খালি করা
+        
         document.getElementById('password').value = ''; 
         document.getElementById('confirmPassword').value = ''; 
         document.getElementById('errorMsg').style.display = 'none';
 
-        // Step 2 লুকিয়ে Step 1 দেখানো (Step 1 এর ডেটা অপরিবর্তিত থাকবে)
         document.getElementById('step2').classList.add('hidden');
         document.getElementById('adminForm').classList.remove('hidden');
     }
