@@ -5,8 +5,6 @@
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
-/* ব্যাকগ্রাউন্ড ইমেজ অপসারণ করে একটি সাধারণ ব্যাকগ্রাউন্ড কালার দেওয়া হলো */
 body {
     background: url('crop01.jpeg') no-repeat center center fixed;
     background-size: cover;
@@ -17,8 +15,6 @@ body {
     flex-direction: column;
     align-items: center;
 }
-
-/* --- Header & Navbar (একদম উপরে পূর্ণ চওড়ায় থাকবে) --- */
 .reg-header {
     width: 100%;
    background: transparent;
@@ -54,7 +50,6 @@ body {
     line-height: 1.5;
 }
 
-/* --- Registration Popup / Container (হেডারের ঠিক নিচে মাঝে থাকবে) --- */
 .container {
     max-width: 450px;
     width: 90%;
