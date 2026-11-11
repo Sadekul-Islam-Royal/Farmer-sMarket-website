@@ -1,0 +1,206 @@
+/* --- Global Reset --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ব্যাকগ্রাউন্ড ইমেজ অপসারণ করে একটি সাধারণ ব্যাকগ্রাউন্ড কালার দেওয়া হলো */
+body {
+    background: url('crop01.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- Header & Navbar (একদম উপরে পূর্ণ চওড়ায় থাকবে) --- */
+.reg-header {
+    width: 100%;
+   background: transparent;
+   backdrop-filter: blur(11.4px);
+    color: #000;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.navbar-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.site-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 8px;
+}
+
+.site-description {
+    font-size: 14px;
+    color: #000;
+    max-width: 650px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* --- Registration Popup / Container (হেডারের ঠিক নিচে মাঝে থাকবে) --- */
+.container {
+    max-width: 450px;
+    width: 90%;
+    margin: 0 auto 50px auto;
+    background: transparent;
+    backdrop-filter: blur(19.4px);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.role-selection-view h2, 
+.container form h2 {
+    color: #111921;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 30px;
+}
+
+.role-selection-view p {
+    text-align: center;
+    color: #dfedee;
+    margin-bottom: 20px;
+}
+
+.role-btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 15px;
+    background-color: #2ecc65;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.role-btn:hover {
+    background-color: #27ae60;
+    transform: translateY(-2px);
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #110808;
+}
+
+.login-link a {
+    color: #1a0dae;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* Form Groups & Inputs */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #130909;
+    font-size: 14px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #2ecc71;
+}
+
+/* Form Action Buttons */
+form button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #f2f4f2;
+    color: rgb(12, 12, 12);
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+}
+
+form button[type="submit"]:hover {
+    background-color: #58e830;
+}
+
+.back-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #212323;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+}
+
+.back-btn:hover {
+    background-color: #0c0c0c;
+}
+
+.hidden {
+    display: none;
+}
+
+/* --- Responsive Design for Mobile Devices --- */
+@media screen and (max-width: 600px) {
+    .container {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .site-title {
+        font-size: 24px;
+    }
+
+    .site-description {
+        font-size: 13px;
+        padding: 0 10px;
+    }
+}
