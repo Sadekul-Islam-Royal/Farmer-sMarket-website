@@ -5,6 +5,8 @@
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+
 body {
     background: url('crop01.jpeg') no-repeat center center fixed;
     background-size: cover;
@@ -15,10 +17,11 @@ body {
     flex-direction: column;
     align-items: center;
 }
+
+/* --- Header & Navbar  --- */
 .reg-header {
     width: 100%;
-   background: transparent;
-   backdrop-filter: blur(11.4px);
+    background-color: #065f46;
     color: #000;
     padding: 20px 0;
     text-align: center;
@@ -38,24 +41,24 @@ body {
 .site-title {
     font-size: 32px;
     font-weight: bold;
-    color: #000;
+    color: #fff;
     margin-bottom: 8px;
 }
 
 .site-description {
     font-size: 14px;
-    color: #000;
+    color: #fff;
     max-width: 650px;
     text-align: center;
     line-height: 1.5;
 }
 
+/* --- Registration Popup / Container  --- */
 .container {
     max-width: 450px;
     width: 90%;
     margin: 0 auto 50px auto;
-    background: transparent;
-    backdrop-filter: blur(19.4px);
+    background-color: #d8cfcf;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
@@ -71,7 +74,7 @@ body {
 
 .role-selection-view p {
     text-align: center;
-    color: #dfedee;
+    color: #000;
     margin-bottom: 20px;
 }
 
