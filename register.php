@@ -38,7 +38,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $role = $_POST['role_type'] ?? '';
-    $password = isset($_POST['password']) ? password_hash($_POST['password'], PASSWORD_DEFAULT) : '';
+    $rawPassword = $_POST['password'] ?? '';
+
+    if (strlen($rawPassword) < 8) {
+        echo "<script>alert('Password must be at least 8 characters long.'); window.history.back();</script>";
+        $conn->close();
+        exit();
+    }
+
+    $password = password_hash($rawPassword, PASSWORD_DEFAULT);
 
     $stmt = null;
     $redirect = 'homePage.php';
@@ -50,29 +58,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $phone      = trim($_POST['farmerPhone'] ?? '');
         $rawAddr    = trim($_POST['farmerAddress'] ?? '');
         $addrParts  = parseAddressParts($rawAddr);
-        $village    =$addrParts['village'];
-        $upazila    =$addrParts['upazila'];
-        $district   =$addrParts['district'];
+        $village    = $addrParts['village'];
+        $upazila    = $addrParts['upazila'];
+        $district   = $addrParts['district'];
 
-        $stmt =$conn->prepare("INSERT INTO farmers (name, nid, phone, village, upazila, district, password) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssss", $name, $nid,$phone, $village,$upazila, $district,$password);
+        $stmt = $conn->prepare("INSERT INTO farmers (name, nid, phone, village, upazila, district, password) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssssss", $name, $nid, $phone, $village, $upazila, $district, $password);
 
-        $redirect = 'farmerProfile.php';$msg = 'Farmer Registration Successful!';
+        $redirect = 'farmerProfile.php';
+        $msg = 'Farmer Registration Successful!';
     } elseif ($role === 'mill_owner') {
         $name       = trim($_POST['millOwnerName'] ?? '');
         $phone      = trim($_POST['millPhone'] ?? '');
         $mill_id    = trim($_POST['millID'] ?? '');
         $rawAddr    = trim($_POST['millAddress'] ?? '');
         $addrParts  = parseAddressParts($rawAddr);
-        $village    =$addrParts['village'];
-        $upazila    =$addrParts['upazila'];
-        $district   =$addrParts['district'];
+        $village    = $addrParts['village'];
+        $upazila    = $addrParts['upazila'];
+        $district   = $addrParts['district'];
         $crop_types = trim($_POST['cropTypeString'] ?? '');
 
-        $stmt =$conn->prepare("INSERT INTO mill_owners (name, phone, mill_id, village, upazila, district, crop_types, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssssss", $name,$phone, $mill_id,$village, $upazila,$district, $crop_types,$password);
+        $stmt = $conn->prepare("INSERT INTO mill_owners (name, phone, mill_id, village, upazila, district, crop_types, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssssss", $name, $phone, $mill_id, $village, $upazila, $district, $crop_types, $password);
 
-        $redirect = 'MillProfile.php';$msg = 'Mill Owner Registration Successful!';
+        $redirect = 'MillProfile.php';
+        $msg = 'Mill Owner Registration Successful!';
     } elseif ($role === 'admin') {
         $name        = trim($_POST['adminName'] ?? '');
         $phone       = trim($_POST['adminPhone'] ?? '');
@@ -80,19 +90,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $employee_id = trim($_POST['adminIdEmployee'] ?? '');
         $rawAddr     = trim($_POST['adminAddress'] ?? '');
         $addrParts   = parseAddressParts($rawAddr);
-        $upazila     =$addrParts['upazila'] !== '' ? $addrParts['upazila'] :$addrParts['village'];
-        $district    =$addrParts['district'] !== '' ? $addrParts['district'] :$rawAddr;
+        $upazila     = $addrParts['upazila'] !== '' ? $addrParts['upazila'] : $addrParts['village'];
+        $district    = $addrParts['district'] !== '' ? $addrParts['district'] : $rawAddr;
 
-        $stmt =$conn->prepare("INSERT INTO admins (name, phone, email, employee_id, upazila, district, password) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssss", $name, $phone,$email, $employee_id,$upazila, $district,$password);
+        $stmt = $conn->prepare("INSERT INTO admins (name, phone, email, employee_id, upazila, district, password) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssssss", $name, $phone, $email, $employee_id, $upazila, $district, $password);
 
-        $redirect = 'adminProfile.php';$msg = 'Admin Registration Successful!';
+        $redirect = 'adminProfile.php';
+        $msg = 'Admin Registration Successful!';
     }
 
     if ($stmt) {
         if ($stmt->execute()) {
-            $_SESSION['user_id'] =$stmt->insert_id;
-            $_SESSION['role'] =$role;
+            $_SESSION['user_id'] = $stmt->insert_id;
+            $_SESSION['role'] = $role;
 
             $safeMsg = json_encode($msg);
             $safeUrl = json_encode($redirect);
@@ -245,12 +256,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="form-group">
                 <label>Password:</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password" minlength="8" required>
             </div>
             <div class="form-group">
                 <label>Confirm Password:</label>
-                <input type="password" id="confirmPassword" required>
-                <small id="errorMsg" style="color: #ff6b6b; display: none; font-weight: bold; margin-top: 5px;">Passwords do not match!</small>
+                <input type="password" id="confirmPassword" minlength="8" required>
+                <small id="errorMsg" style="color: #ff6b6b; display: none; font-weight: bold; margin-top: 5px;"></small>
             </div>
             <button type="submit">Submit</button>
             <button type="button" class="back-btn" onclick="goToStep1()">Back</button>
@@ -336,11 +347,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             const confirmPass = document.getElementById('confirmPassword').value;
             const errorMsg = document.getElementById('errorMsg');
 
-            if (pass !== confirmPass) {
+            if (pass.length < 8) {
+                errorMsg.innerText = 'Password must be at least 8 characters long!';
                 errorMsg.style.display = 'block';
                 event.preventDefault();
                 return false;
             }
+
+            if (pass !== confirmPass) {
+                errorMsg.innerText = 'Passwords do not match!';
+                errorMsg.style.display = 'block';
+                event.preventDefault();
+                return false;
+            }
+
             errorMsg.style.display = 'none';
             return true;
         }
