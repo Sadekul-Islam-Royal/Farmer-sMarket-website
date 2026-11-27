@@ -1,4 +1,6 @@
 /*
+ * Repository: farmers-market-portal
+ * File: homePage.css
  * Module: Public Landing Page & Login Modal Stylesheet
  * Description: Preserves original navbar and login popup styles while adding responsive
  *              hero banner, horizontal notice/mill post cards, About step-by-step layout,
@@ -880,4 +882,22 @@ header {
     .navbar-logo {
         font-size: 1.6rem;
     }
+}
+.lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.navbar-container .navbar-menu li.lang-switcher a {
+    padding: 5px 12px;
+    font-size: 0.95rem;
+    border-radius: 14px;
+    border: 1px solid #a7f3d0;
+}
+
+.navbar-container .navbar-menu li.lang-switcher a.active-lang {
+    background-color: #ecfdf5;
+    color: #065f46;
+    font-weight: 700;
 }
