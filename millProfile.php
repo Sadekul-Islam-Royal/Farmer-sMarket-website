@@ -1,6 +1,6 @@
 <?php
 /**
- * Repository: farmers-market-portal
+ * Repository: farmers-market
  * File: MillProfile.php
  * Module: Mill Owner Dashboard & Marketplace Management
  * Description: Handles mill owner profile updates (including profile photo) using
