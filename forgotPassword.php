@@ -280,24 +280,7 @@ if (isset($_SESSION['pwd_reset'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $is_bn ? 'পাসওয়ার্ড পুনরুদ্ধার | কৃষক বাজার' : "Forgot Password | Farmer's Market"; ?></title>
     <link rel="stylesheet" href="forgotPassword.css">
-    <style>
-        .lang-switch-group { display: inline-flex; gap: 6px; align-items: center; }
-        .lang-switch-btn {
-            padding: 5px 11px;
-            border-radius: 6px;
-            border: 1px solid #cbd5e1;
-            background: #ffffff;
-            color: #0f172a;
-            font-size: 12px;
-            font-weight: 600;
-            text-decoration: none;
-        }
-        .lang-switch-btn.active {
-            background: #059669;
-            border-color: #059669;
-            color: #ffffff;
-        }
-    </style>
+    <link rel="stylesheet" href="lang-toggle.css">
 </head>
 
 <body>
@@ -310,8 +293,7 @@ if (isset($_SESSION['pwd_reset'])) {
                 <ul class="navbar-menu" style="display:flex; align-items:center; gap:14px;">
                     <li>
                         <div class="lang-switch-group">
-                            <a href="<?php echo lang_url('bn'); ?>" class="lang-switch-btn <?php echo $is_bn ? 'active' : ''; ?>">বাংলা</a>
-                            <a href="<?php echo lang_url('en'); ?>" class="lang-switch-btn <?php echo !$is_bn ? 'active' : ''; ?>">English</a>
+                           <?php render_lang_toggle(); ?>
                         </div>
                     </li>
                     <li><a href="homePage.php"><?php echo $is_bn ? 'হোম' : 'Home'; ?></a></li>
