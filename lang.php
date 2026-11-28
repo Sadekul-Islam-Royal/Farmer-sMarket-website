@@ -3,9 +3,17 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// URL থেকে ?lang=bn বা ?lang=en আসলে session-এ সেভ করুন
+// URL থেকে ?lang=bn বা ?lang=en আসলে session-এ সেভ করে clean URL-এ redirect করুন
 if (isset($_GET['lang']) && in_array($_GET['lang'], ['bn', 'en'], true)) {
     $_SESSION['lang'] = $_GET['lang'];
+
+    $query = $_GET;
+    unset($query['lang']);
+    $path = strtok($_SERVER['REQUEST_URI'] ?? 'homePage.php', '?');
+    $cleanUrl = $path . (!empty($query) ? '?' . http_build_query($query) : '');
+
+    header('Location: ' . $cleanUrl);
+    exit;
 }
 
 $current_lang = $_SESSION['lang'] ?? 'en';
@@ -70,5 +78,17 @@ function lang_url(string $lang): string {
     $query = $_GET;
     $query['lang'] = $lang;
     $path = strtok($_SERVER['REQUEST_URI'] ?? 'homePage.php', '?');
-    return htmlspecialchars($path . '?' . http_build_query($query));
+    return htmlspecialchars($path . '?' . http_build_query($query), ENT_QUOTES, 'UTF-8');
+}
+
+function render_lang_toggle(string $extraClass = ''): void {
+    global $current_lang;
+    $targetLang = ($current_lang === 'en') ? 'bn' : 'en';
+    $buttonText = ($current_lang === 'en') ? 'বাংলা' : 'English';
+    $href = lang_url($targetLang);
+    $classes = trim('lang-switch-btn ' . $extraClass);
+
+    echo '<a href="' . $href . '" class="' . htmlspecialchars($classes, ENT_QUOTES, 'UTF-8') . '" data-lang="' . $targetLang . '">'
+        . htmlspecialchars($buttonText, ENT_QUOTES, 'UTF-8')
+        . '</a>';
 }
