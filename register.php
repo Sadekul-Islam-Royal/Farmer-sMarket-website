@@ -489,24 +489,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars(__t('site_name')); ?> - <?php echo $is_bn ? 'নিবন্ধন' : 'Registration'; ?></title>
     <link rel="stylesheet" href="registerStyle.css">
-    <style>
-        .lang-switch-group { display: inline-flex; gap: 6px; align-items: center; }
-        .lang-switch-btn {
-            padding: 5px 11px;
-            border-radius: 6px;
-            border: 1px solid #cbd5e1;
-            background: #ffffff;
-            color: #0f172a;
-            font-size: 12px;
-            font-weight: 600;
-            text-decoration: none;
-        }
-        .lang-switch-btn.active {
-            background: #059669;
-            border-color: #059669;
-            color: #ffffff;
-        }
-    </style>
+    <link rel="stylesheet" href="lang-toggle.css">
 </head>
 <body>
 
@@ -515,8 +498,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
                 <h1 class="site-title" style="margin:0;"><?php echo htmlspecialchars(__t('site_name')); ?></h1>
                 <div class="lang-switch-group">
-                    <a href="<?php echo lang_url('bn'); ?>" class="lang-switch-btn <?php echo $is_bn ? 'active' : ''; ?>">বাংলা</a>
-                    <a href="<?php echo lang_url('en'); ?>" class="lang-switch-btn <?php echo !$is_bn ? 'active' : ''; ?>">English</a>
+                    <?php render_lang_toggle(); ?>
                 </div>
             </div>
             <p class="site-description">
