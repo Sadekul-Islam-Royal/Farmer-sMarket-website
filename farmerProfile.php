@@ -416,24 +416,7 @@ $is_bn = ($current_lang === 'bn');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $is_bn ? 'কৃষক ড্যাশবোর্ড | কৃষক বাজার' : "Farmer Dashboard | Farmer's Market"; ?></title>
     <link rel="stylesheet" href="farmerProfileSytle.css">
-    <style>
-        .lang-switch-group { display: inline-flex; gap: 6px; align-items: center; }
-        .lang-switch-btn {
-            padding: 5px 11px;
-            border-radius: 6px;
-            border: 1px solid #cbd5e1;
-            background: #ffffff;
-            color: #0f172a;
-            font-size: 12px;
-            font-weight: 600;
-            text-decoration: none;
-        }
-        .lang-switch-btn.active {
-            background: #059669;
-            border-color: #059669;
-            color: #ffffff;
-        }
-    </style>
+   <link rel="stylesheet" href="lang-toggle.css">
 </head>
 <body>
 
@@ -450,8 +433,7 @@ $is_bn = ($current_lang === 'bn');
             </div>
             <div class="nav-user-area" style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
                 <div class="lang-switch-group">
-                    <a href="<?php echo lang_url('bn'); ?>" class="lang-switch-btn <?php echo $is_bn ? 'active' : ''; ?>">বাংলা</a>
-                    <a href="<?php echo lang_url('en'); ?>" class="lang-switch-btn <?php echo !$is_bn ? 'active' : ''; ?>">English</a>
+                   <?php render_lang_toggle(); ?>
                 </div>
                 <?php if ($farmer_photo !== '' && file_exists($farmer_photo)): ?>
                     <img src="<?php echo htmlspecialchars($farmer_photo); ?>" alt="Farmer Photo" style="width:34px; height:34px; border-radius:50%; object-fit:cover; border:1px solid #cbd5e1;">
