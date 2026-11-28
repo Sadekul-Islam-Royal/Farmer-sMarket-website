@@ -1,0 +1,32 @@
+.lang-switch-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    background-color: #20aa08;
+    color: #076808;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.lang-switch-btn:hover {
+    background-color: #20aa08;
+    border-color: #94a3b8;
+    color: #0f172a;
+}
+
+.lang-switch-btn:active {
+    background-color: #4075bb;
+}
+
+.lang-switch-btn:focus-visible {
+    outline: 2px solid #15803d;
+    outline-offset: 2px;
+}
